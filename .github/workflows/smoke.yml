@@ -1,0 +1,20 @@
+name: Smoke Test CI
+
+on:
+  push
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Write status file
+        run: echo "status=ok" > smoke-status.txt
+
+      - name: Upload smoke-report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-report
+          path: smoke-status.txt
